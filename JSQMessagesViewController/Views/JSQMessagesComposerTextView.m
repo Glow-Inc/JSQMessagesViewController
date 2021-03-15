@@ -33,7 +33,12 @@
 
     CGFloat cornerRadius = 6.0f;
 
-    self.backgroundColor = [UIColor whiteColor];
+    if (@available(iOS 13, *)) {
+        self.backgroundColor = [UIColor systemBackgroundColor];
+    } else {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+
     self.layer.borderWidth = 0.5f;
     self.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.layer.cornerRadius = cornerRadius;

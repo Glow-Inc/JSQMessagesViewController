@@ -169,7 +169,12 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (void)jsq_configureMessagesViewController
 {
-    self.view.backgroundColor = [UIColor whiteColor];
+
+    if (@available(iOS 13, *)) {
+        self.view.backgroundColor = [UIColor systemBackgroundColor];
+    } else {
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
 
     self.jsq_isObserving = NO;
 

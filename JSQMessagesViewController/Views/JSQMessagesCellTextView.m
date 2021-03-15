@@ -23,8 +23,11 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    self.textColor = [UIColor whiteColor];
+    if (@available(iOS 13, *)) {
+        self.textColor = [UIColor systemBackgroundColor];
+    } else {
+        self.textColor = [UIColor whiteColor];
+    }
     self.editable = NO;
     self.selectable = YES;
     self.userInteractionEnabled = YES;
