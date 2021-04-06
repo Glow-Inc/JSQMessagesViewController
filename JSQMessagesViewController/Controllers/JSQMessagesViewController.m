@@ -274,6 +274,9 @@ JSQMessagesKeyboardControllerDelegate>
 
     [self jsq_configureMessagesViewController];
     [self jsq_registerForNotifications:YES];
+    if (@available(iOS 11, *)) {
+        [self jsq_setToolbarBottomLayoutGuideConstant:self.collectionView.window.safeAreaInsets.bottom];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -841,6 +844,10 @@ JSQMessagesKeyboardControllerDelegate>
 {
     if (self.keyboardController.keyboardIsVisible) {
         [self jsq_setToolbarBottomLayoutGuideConstant:CGRectGetHeight(self.keyboardController.currentKeyboardFrame)];
+    } else {
+        if (@available(iOS 11, *)) {
+            [self jsq_setToolbarBottomLayoutGuideConstant:self.collectionView.window.safeAreaInsets.bottom];
+        }
     }
 }
 
@@ -1065,6 +1072,10 @@ JSQMessagesKeyboardControllerDelegate>
 
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom
 {
+    if (@available(iOS 11, *)) {
+        bottom = bottom - self.collectionView.window.safeAreaInsets.bottom;
+    }
+
     UIEdgeInsets insets = UIEdgeInsetsMake(top, 0.0f, bottom, 0.0f);
     self.collectionView.contentInset = insets;
     self.collectionView.scrollIndicatorInsets = insets;
